@@ -1,0 +1,137 @@
+[33mcommit d0cb004ac8137af5349cecdded634cac45121609[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: fjmartinez <fjmartinezduran@gmail.com>
+Date:   Fri Jan 8 11:48:21 2021 +0100
+
+    enviroment ignore
+
+[33mcommit fe11396835bebbcd36a85d127c87b47587d951b4[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: fjmartinez <fjmartinezduran@gmail.com>
+Date:   Fri Jan 8 11:44:29 2021 +0100
+
+    dejo de hacer seguimiento de los enviroments
+
+[33mcommit 7968885ccd452de30c60285bafe9b433532794fe[m
+Author: Francisco Martinez <fjmartinezduran@gmail.com>
+Date:   Sat Nov 21 16:36:33 2020 +0100
+
+    analitycs
+
+[33mcommit b9e17ff8401cf0e7f762142b8ff6952c2eb4354e[m
+Author: Francisco Martinez <fjmartinezduran@gmail.com>
+Date:   Wed Nov 18 10:35:27 2020 +0100
+
+    meta tags
+
+[33mcommit 808e56c5decf5b1992a5f633d1906dcf91c4c8c5[m
+Author: Francisco Martinez <fjmartinezduran@gmail.com>
+Date:   Wed Nov 18 10:19:07 2020 +0100
+
+    0.9.3
+
+[33mcommit 2945711ac3e38a3449fcfe9394f4427439496a6a[m
+Author: Francisco Martinez <fjmartinezduran@gmail.com>
+Date:   Tue Nov 17 21:27:14 2020 +0100
+
+    before angular
+
+[33mcommit b3837b336ae9f3f5bc52ac4e27f02703befbc2ea[m
+Author: Francisco Martinez <fjmartinezduran@gmail.com>
+Date:   Mon Aug 31 20:19:57 2020 +0200
+
+    ya se pueden registrar nuevos usuarios
+
+[33mcommit 1f4f749f1bc0f2494d897bf704e64b1aa331f3eb[m
+Author: Francisco Martinez <fjmartinezduran@gmail.com>
+Date:   Wed Aug 26 10:36:03 2020 +0200
+
+    Angular 10 OK
+
+[33mcommit 06065f7de378dec4d1cde854ba0783d01425652e[m
+Author: Francisco Martinez <fjmartinezduran@gmail.com>
+Date:   Wed Aug 26 09:36:42 2020 +0200
+
+    Angular 9 OK
+
+[33mcommit 8b691a8df7d03023702a94e5164fa34b17166102[m
+Author: Francisco Martinez <fjmartinezduran@gmail.com>
+Date:   Wed Aug 26 09:27:15 2020 +0200
+
+    angular 8 final OK
+
+[33mcommit a107f78e5e1d08ce19f34aaa6659a2af52ac4f6e[m
+Author: Francisco Martinez <fjmartinezduran@gmail.com>
+Date:   Wed Aug 26 09:17:29 2020 +0200
+
+    antes de actualizar a 10
+
+[33mcommit c482c8f7d820da20a465e52b30048a98a7cd8937[m
+Author: fjmartinez <fjmartinez@inerco.com>
+Date:   Thu Feb 27 11:16:28 2020 +0100
+
+    0.6.4
+
+[33mcommit e480984fe520e7139e7cfa6476978f8d0269e329[m
+Author: fjmartinez <fjmartinez@inerco.com>
+Date:   Mon Feb 24 18:06:03 2020 +0100
+
+    0.6 frypto
+
+[33mcommit 24408e73b818fd89a2a0771d4a11c8901743a323[m
+Author: fjmartinez <fjmartinez@inerco.com>
+Date:   Thu Jan 30 17:38:28 2020 +0100
+
+    0.5.1
+
+[33mcommit b83f2c85324a04eef6015a1d3f94de1e3daa7ecb[m
+Author: fjmartinez <fjmartinez@inerco.com>
+Date:   Mon Jan 20 15:42:38 2020 +0100
+
+    0.4.4
+
+[33mcommit 5049674020b749ec560f6b313f4df4d415a0c488[m
+Author: fjmartinez <fjmartinez@inerco.com>
+Date:   Thu Jan 16 22:48:52 2020 +0100
+
+    creo que he terminado
+
+[33mcommit e301e78040dda8bb20e0571b55b2bc063bf7380f[m
+Author: fjmartinez <fjmartinez@inerco.com>
+Date:   Wed Jan 15 18:30:51 2020 +0100
+
+    new cesta building
+
+[33mcommit 683d8ca6841c726c7e4cc12433e6b9b109348aba[m
+Author: fjmartinez <fjmartinez@inerco.com>
+Date:   Fri Jan 10 13:57:28 2020 +0100
+
+    0.2
+
+[33mcommit 532cad431c6aaa225f960a971377a3d410ccd864[m
+Author: fjmartinez <fjmartinez@inerco.com>
+Date:   Thu Jan 9 18:25:53 2020 +0100
+
+    clean cesta
+
+[33mcommit 5d86f36435d7e26f275366264f4e8c2f2a4c5352[m
+Author: fjmartinez <fjmartinez@inerco.com>
+Date:   Thu Jan 9 13:39:41 2020 +0100
+
+    0.0.1
+
+[33mcommit 3c8f99fa73272ce89140cbe6cae49e8cd10ca68d[m
+Author: fjmartinez <fjmartinez@inerco.com>
+Date:   Wed Jan 8 18:36:21 2020 +0100
+
+    products list
+
+[33mcommit 2d4b05ec272e6aefcb62ff6004691f20f769a574[m
+Author: fjmartinez <fjmartinez@inerco.com>
+Date:   Wed Jan 8 16:35:11 2020 +0100
+
+    begining
+
+[33mcommit ae069dadcc7f942adce7e14ba29978c4fd3cd5c5[m
+Author: fjmartinez <fjmartinez@inerco.com>
+Date:   Wed Jan 8 09:50:10 2020 +0100
+
+    initial commit

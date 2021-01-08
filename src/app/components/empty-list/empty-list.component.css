@@ -1,0 +1,9 @@
+.icono{
+    font-size: 96px; 
+    height: 96px;
+    width: 96px; 
+    background-color: white; 
+    color:#3f51b5; 
+    padding:1rem;
+    border-radius: 50%;
+}

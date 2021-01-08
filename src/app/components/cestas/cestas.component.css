@@ -1,0 +1,46 @@
+.container{
+    margin:0 auto;
+    padding-top: 1rem;       
+    width: 90%;
+}
+
+.enunciado{
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.containerCestas{
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem; 
+    background-color: #fafafa;   
+    text-align: left;
+}
+
+.btnEdit{
+    background-color: orange;   
+    float: right; 
+    margin-top: -2rem;
+}
+
+.invitacion{
+    text-align: center;
+}
+
+.codigo{
+    display:inline-block;
+}
+
+.btnSend{
+    margin-top: 0.4rem;
+    float: right;
+}
+
+.btnAddContainer{
+    text-align: right;
+}
+
+.btnAdd{
+    background-color: #3f51b5;
+    margin: 1rem;         
+}

@@ -1,0 +1,11 @@
+<div mat-dialog-content style="text-align: center">
+  <div style="margin-top:1rem; margin-bottom:1rem">
+    Para confirmar, escribe <b>{{llave}}</b>
+  </div>  
+  <mat-form-field appearance="outline" style="width: 60%; text-align: center">    
+    <input type='text' matInput placeholder="eliminar" [(ngModel)]="confirmacion">
+  </mat-form-field>
+  <div style="text-align: center;">    
+    <button class='btn' mat-raised-button [disabled]='llave!=confirmacion' (click)='goAhead()'>Eliminar</button>              
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<form [formGroup]="mForm">
+    <div mat-dialog-content class="container">
+
+        <input type='hidden' formControlName='id'>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input type='text' matInput placeholder="Nombre" formControlName='nombre'>
+        </mat-form-field>
+        <p>{{ getError('nombre')}}</p>
+             
+        <div class="containerEliminar">
+            <button class='btn btnEliminar' mat-raised-button (click)='Eliminar()' *ngIf="producto.id!=null">Eliminar producto</button>
+        </div>
+        
+    </div>
+    <div mat-dialog-actions style="float: right">
+        <button class='btn btnCerrar' mat-button mat-dialog-close>Cerrar</button>
+        <button class='btn btnGuardar' (click)="Save()" mat-raised-button [disabled]="mForm.invalid">Guardar</button> <!-- type="submit" -->
+    </div>
+</form>

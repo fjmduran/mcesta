@@ -1,0 +1,53 @@
+.container{
+    margin: 0 auto;        
+    text-align: center;
+    width: 90%;
+    max-width: 500px;   
+    height: 100%; 
+    margin-bottom: 64px;
+}
+.enunciado{    
+    margin-top:16px;
+    margin-bottom: 16px;
+}
+
+.containerGroup{
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem; 
+    background-color: #fafafa;   
+    text-align: left;
+}
+
+.btnContainer{
+    display: flex;
+    flex-wrap: nowrap;  
+}
+
+.btnCleanContainer{    
+    width: 50%;
+    text-align: left;
+}
+
+.btnAddContainer{
+    width: 50%;
+    text-align: right;
+}
+
+.btnOpen{
+    background-color: green;   
+    float: right; 
+    margin-left: 0.2rem;
+    margin-top: -2rem;
+}
+
+.btnAdd{
+    background-color: #3f51b5;
+}
+
+.btnClean{
+    background-color: orange;
+    position: fixed;
+    left: 20px;  
+    bottom: 20px;
+}

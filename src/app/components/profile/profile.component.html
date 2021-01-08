@@ -1,0 +1,19 @@
+<div class='container mat-elevation-z15'>
+  <form [formGroup]="ProfileForm" (ngSubmit)="saveUser()">
+
+    <input type='hidden' formControlName='id'>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input type='email' matInput placeholder="Email" formControlName='email'>
+    </mat-form-field>
+    <p>{{ getError('email')}}</p>
+
+    <button type="button" mat-raised-button [routerLink]="['/cestas']">Mis cestas</button>
+    <button type="submit" mat-raised-button [disabled]="ProfileForm.invalid">Guardar</button>
+    <button type="button" mat-raised-button disabled>Cambiar contraseña</button>
+    <button type="button" class="cierraSesion" (click)="cierraSesion()" mat-raised-button>Cerrar sesión</button>
+
+  </form>
+
+</div>

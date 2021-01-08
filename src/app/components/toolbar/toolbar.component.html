@@ -1,0 +1,41 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-content>
+    <mat-toolbar class="mToolbar">
+      <mat-toolbar-row>
+        <button mat-icon-button routerLink='/download'>
+          <mat-icon>cloud_download</mat-icon>
+        </button>
+        <span>v0.9.4</span>
+        <span class="espacio"></span>
+        <div *ngIf="!userOK">
+          <button mat-icon-button routerLink='/login'>
+            <mat-icon>vpn_key</mat-icon>
+          </button>            
+        </div>
+        
+        <div *ngIf="userOK">
+          <button mat-icon-button routerLink='/frypto' *ngIf="fjmardu">
+            <mat-icon>security</mat-icon>
+          </button>
+
+          <button mat-icon-button routerLink='/profile'>
+            <mat-icon>account_circle</mat-icon>
+          </button>
+
+          <button mat-icon-button [routerLink]="['/grupos', user.cesta.id]" *ngIf="cestaOK">
+            <mat-icon>storefront</mat-icon>
+          </button>
+
+          <button mat-icon-button routerLink='/home' *ngIf="cestaOK">
+            <mat-icon>shopping_cart</mat-icon>
+          </button>
+        </div>
+
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <div class="body">
+      <ng-content></ng-content>
+    </div>
+    <!-- <div class='footer'></div> -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

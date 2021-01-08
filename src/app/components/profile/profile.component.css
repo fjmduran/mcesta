@@ -1,0 +1,46 @@
+.container{
+    text-align: center;    
+    border-radius: 20px;
+    max-width: 500px;    
+    margin: auto;    
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: #fafafa;
+    padding:1rem;
+    width: 80%;    
+}
+
+img{            
+    border-radius: 50%;
+    border: 3px solid #3f51b5;
+    width: 40%;    
+}
+
+.textNombre{
+    font-size: large;
+    font-weight: bold;
+    padding:1rem;
+    
+}
+
+p{
+    margin-top: -1rem;
+    color:red;
+}
+
+mat-form-field{    
+    width: 90%;    
+}
+
+button{
+    width: 95%;
+    height: 3rem;
+    background-color: #3f51b5;
+    color:white;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.cierraSesion{
+    background-color: red;
+}
