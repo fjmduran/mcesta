@@ -9,20 +9,28 @@
               <input type='email' matInput placeholder="Email" formControlName='email'>
               <mat-icon matSuffix>email</mat-icon>
             </mat-form-field>
-            <p>{{ getErrorLogin('email')}}</p>
+            <p class="error">{{ getErrorLogin('email')}}</p>
 
             <mat-form-field appearance="outline">
               <mat-label>Password</mat-label>
               <input type={{pwdType}} matInput placeholder="Password" formControlName='pwd'>
               <mat-icon matSuffix (click)="changeVisibilidad()">{{pwdIcon}}</mat-icon>
             </mat-form-field>
-            <p>{{ getErrorLogin('pwd')}}</p>
+            <p class="error">{{ getErrorLogin('pwd')}}</p>
 
             <div class='buttonContainer' style='text-align: center'>
               <button class="btnRegister" type="submit" color='primary' mat-raised-button [disabled]="LoginForm.invalid" [class.spinner]="boolSpinner">
                 <mat-icon>account_circle</mat-icon> ACCEDER
               </button>              
             </div>
+
+            <hr style="margin-top: 1em;">
+            <div>
+              <p>O si lo prefieres, identifícate con tu cuenta de </p>              
+              <button class='btn-social' type="button" mat-raised-button (click)='onLoginGoogle()' [disabled]=boolSpinner>
+                <mat-icon svgIcon="google"></mat-icon>OOGLE
+              </button>
+            </div>  
 
           </form>  
           <br>        
@@ -33,12 +41,7 @@
               <mat-icon>vpn_key</mat-icon> REGÍSTRATE, ES GRATIS
             </button>
           </div>                             
-          <div>
-            <p>o entra con tu cuenta de Google</p>
-            <button class='btn-social' type="button" mat-raised-button color='primary' (click)='onLoginGoogle()' [disabled]=boolSpinner>
-              <mat-icon svgIcon="google"></mat-icon>OOGLE
-            </button>
-          </div>                    
+                  
         </div>
 
         <div *ngIf='sigin'>
