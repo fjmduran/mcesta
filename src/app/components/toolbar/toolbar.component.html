@@ -1,0 +1,36 @@
+
+    <mat-toolbar class="mToolbar">
+      <mat-toolbar-row>
+        <button mat-icon-button routerLink='/download'>
+          <mat-icon>cloud_download</mat-icon>
+        </button>
+        <span>{{appVersion}}</span>
+        <span class="espacio"></span>
+        <ng-container *ngIf="auth.user$ | async as user; else login">
+          <button mat-icon-button routerLink='/frypto' *ngIf="user.email==='fjmartinezduran@gmail.com'">
+            <mat-icon>security</mat-icon>
+          </button>
+
+          <button mat-icon-button routerLink='/profile'>
+            <mat-icon>account_circle</mat-icon>
+          </button>
+
+          <button mat-icon-button [routerLink]="['/grupos', user.cesta.id]" *ngIf="user.cesta.id">
+            <mat-icon>storefront</mat-icon>
+          </button>
+
+          <button mat-icon-button routerLink='/home' *ngIf="user.cesta.id">
+            <mat-icon>list_alt</mat-icon>
+          </button>
+        </ng-container>
+        <ng-template #login>
+          <button mat-icon-button routerLink='/login'>
+            <mat-icon>vpn_key</mat-icon>
+          </button>            
+        </ng-template>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <div class="body">
+      <ng-content></ng-content>
+    </div>
+    <!-- <div class='footer'></div> -->

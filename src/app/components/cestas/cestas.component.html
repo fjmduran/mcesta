@@ -1,0 +1,54 @@
+<div class="container">
+  <ng-container *ngIf="user$ | async as user; else loading">
+    <empty-list [msg]="msgEmpty" *ngIf="user.cestas.length === 0"></empty-list>
+    <div *ngIf="user.cestas.length != 0">
+      <div class="enunciado">
+        Listado de cestas de <b>{{ user.email }}</b>
+      </div>
+      <div
+        *ngFor="let c of user.cestas"
+        class="mat-elevation-z5 containerCestas"
+      >
+        {{ c.nombre }}
+        <div style="text-align: right">
+          <button class="btnEdit" mat-mini-fab (click)="openCesta(user,c)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="invitacion">
+      <div>¿Tiene un código de invitación para participar en una cesta?</div>
+      <div class="codigo">
+        <mat-form-field appearance="outline">
+          <mat-label>Código de invitación</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Código de invitación"
+            [(ngModel)]="codInv"
+          />
+        </mat-form-field>
+        <button mat-fab color="warn" class="btnSend" (click)="saveCod(user)">
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="btnAddContainer">
+      <button
+        class="btnAdd mat-elevation-z15"
+        mat-fab
+        (click)="openCesta(user,null)"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </ng-container>
+  <ng-template #loading>
+    <app-spinner></app-spinner>
+  </ng-template>
+</div>

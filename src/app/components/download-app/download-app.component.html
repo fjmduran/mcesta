@@ -1,0 +1,67 @@
+<div class="enunciado">
+  <h2>Instala la APP</h2>  
+  ¿Qué navegador usa?
+</div>
+
+<div class="container">
+  <div *ngIf="!safari">
+    <div class="epigrafe" (click)="OpenSamsung()">
+      Internet de Samsung
+      <div *ngIf="openSamsung">
+        <p>
+          <img src="../../../../assets/instalar/samsung/0.jpg">
+          <br>
+        </p>
+      </div>
+    </div>
+   <div class="epigrafe" (click)="OpenChrome()">
+    Google Chrome
+    <div *ngIf="openChrome">
+      <p>
+        Debería de aparecer la opción de "Añadir Mi cesta a la pantalla de inicio" en la parte inferior de la pantalla para instalar la APP
+        <img src="../../../../assets/instalar/chrome/0.jpg">
+        <br>
+        Si no aparece, seguir el siguiente procedimiento:
+      </p>
+      <p>
+        1. Pulsar en el botón de opciones
+        <img src="../../../../assets/instalar/chrome/1.jpg">
+      </p>
+      <p>
+        2. Pulsar en la opción de <i>Añadir a la pantalla de inicio</i>
+        <img src="../../../../assets/instalar/chrome/2.jpg">
+      </p>
+      <p>
+        3. Elegir el nombre y pulsar en <i> Añadir</i>
+        <img src="../../../../assets/instalar/chrome/3.jpg">
+      </p>
+      <p>
+        3. APP instalada
+        <img src="../../../../assets/instalar/chrome/4.jpg">
+      </p>
+     </div>
+   </div>
+    
+  </div>
+  
+  <div *ngIf="safari">
+    <p>
+      1. Pulsar en el botón de opciones
+      <img src="../../../../assets/instalar/safari/1.jpg">
+    </p>
+    <p>
+      2. Pulsar en la opción de <i>Añadir a la pantalla de inicio</i>
+      <img src="../../../../assets/instalar/safari/2.jpg">
+    </p>
+    <p>
+      3. Elegir el nombre y pulsar en <i> Añadir</i>
+      <img src="../../../../assets/instalar/safari/3.jpg">
+    </p>
+    <p>
+      3. APP instalada
+      <img src="../../../../assets/instalar/safari/4.jpg">
+    </p>
+  </div>
+<br>
+  <a href="https://fjmduran.com">fjmduran.com</a>
+</div>

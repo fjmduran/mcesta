@@ -1,0 +1,45 @@
+.container{
+    margin: 0 auto;    
+    margin-top:1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+}
+.enunciado{    
+    text-align: center;
+    margin-top:1rem;
+    margin-bottom: 1rem;
+}
+
+.containerGroup{
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem; 
+    background-color: #fafafa;   
+    text-align: left;
+}
+
+.btnOpen{
+    background-color: green;
+    color: white;
+    float: right; 
+    margin-left: 0.2rem;
+    margin-top: -2rem;
+}
+
+.btnEdit{
+    background-color: orange;
+    color: white;
+    float: right; 
+    margin-top: -2rem;
+}
+
+.btnAddContainer{
+    text-align: right;
+}
+
+.btnAdd{
+    background-color: #3f51b5;
+    position:fixed;    
+}

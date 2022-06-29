@@ -1,0 +1,25 @@
+.titulo{
+    text-align: center;
+    color: white;
+}
+
+.container{
+    text-align: center;
+    padding-top:1rem;
+}
+
+p{
+    margin-top: -1rem;
+    color:red;
+    text-align: center;
+}
+
+.btn{
+    color:white;
+    border-radius: 8px;   
+}
+
+.btnGuardar{
+    background-color: orange;  
+}
+

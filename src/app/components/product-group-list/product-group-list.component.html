@@ -1,0 +1,26 @@
+<div class="container">
+    <app-spinner *ngIf="spinnerOn"></app-spinner>
+    <div style='text-align: right' *ngIf="!spinnerOn">
+        <div class="enunciado">
+            Productos de <b>{{grupo.nombre}}</b>
+        </div>
+        <!-- <app-ad-sense></app-ad-sense> -->
+        <div *ngFor="let p of grupo.productos" class="mat-elevation-z5 containerGroup">
+                {{p.nombre}}
+                <div style="text-align: right">
+                    <button class='btnAddCesta' mat-mini-fab (click)='toCesta(p)' *ngIf="!p.pendiente">
+                        <mat-icon>playlist_add</mat-icon>
+                    </button>
+                    <button class='btnEdit' mat-mini-fab (click)='OpenDialog(p)'>
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </div>
+        </div>
+        <!-- <app-ad-sense></app-ad-sense> -->
+        <div class="btnAddContainer">
+            <button class="FAB btnAdd mat-elevation-z10" type="button" color="primary" mat-fab (click)="OpenDialog(null)">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

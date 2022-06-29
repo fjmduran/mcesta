@@ -1,0 +1,70 @@
+<div class="container">
+  <ng-template #loading>
+    <app-spinner></app-spinner>
+  </ng-template>
+  <div *ngIf="user$ | async as user; else loading">
+    <ng-container *ngIf="loadCesta(user) | async as cesta; else loading">
+      <div class="enunciado">
+        Cesta: <b>{{ cesta.nombre }}</b>
+      </div>
+
+      <div class="topButtons">
+        <button
+          class="mat-elevation-z8"
+          color="accent"
+          mat-raised-button
+          [disabled]="prodChecked.length <= 0"
+          (click)="cleanCesta()"
+        >
+          <mat-icon>done_all</mat-icon> Limpiar lista
+        </button>
+        <button
+          class="btn mat-elevation-z8"
+          color="primary"
+          mat-raised-button
+          (click)="addProduct()"
+        >
+          <mat-icon>playlist_add</mat-icon> Añadir a la lista
+        </button>
+      </div>
+      <div *ngFor="let p of pendientes" class="mat-elevation-z5 containerGroup">
+        <div [ngStyle]="Tacha(p)">
+          {{ p.nombre }}
+        </div>
+        <div style="text-align: right">
+          <button
+            class="btnOpen"
+            mat-mini-fab
+            (click)="CheckProduct(p)"
+            [ngStyle]="ColorChange(p)"
+          >
+            <mat-icon>check</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <br />
+    </ng-container>
+  </div>
+  <empty-list [msg]="msgEmpty" *ngIf="pendientes.length === 0"></empty-list>
+  <!-- <app-ad-sense></app-ad-sense> -->
+</div>
+<div class="bottomButtons">
+  <button
+    class="btnClean mat-elevation-z16"
+    color="accent"
+    mat-fab
+    *ngIf="prodChecked.length > 0"
+    (click)="cleanCesta()"
+  >
+    <mat-icon>done_all</mat-icon>
+  </button>
+  <button
+    class="FAB btnAdd mat-elevation-z16"
+    color="primary"
+    mat-fab
+    (click)="addProduct()"
+  >
+    <mat-icon>playlist_add</mat-icon>
+  </button>
+</div>

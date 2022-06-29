@@ -1,0 +1,22 @@
+<form [formGroup]="mForm" (ngSubmit)="Save()">
+    <div mat-dialog-content class="container">
+        <input type='hidden' formControlName='id'>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input type='text' matInput placeholder="Nombre" formControlName='nombre'>
+        </mat-form-field>
+        <p>{{ getError('nombre')}}</p>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Orden</mat-label>
+            <input type='number' matInput placeholder="Orden" formControlName='orden'>
+        </mat-form-field>
+        <p>{{ getError('orden')}}</p>
+
+    </div>
+    <div mat-dialog-actions style="float: right">
+        <button class='btn' type="button" mat-button mat-dialog-close>Cerrar</button>
+        <button class='btn' color="primary" type="submit" mat-raised-button [disabled]="mForm.invalid">Guardar</button>
+    </div>
+</form>

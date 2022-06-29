@@ -1,0 +1,22 @@
+<div class="container">
+    <form [formGroup]="Form">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Encripta</mat-label>
+          <input type='text' matInput placeholder="Encripta" formControlName='encripta'>
+        </mat-form-field>    
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Desencripta</mat-label>
+          <input type='text' matInput placeholder="Desencripta" formControlName='desencripta'>
+        </mat-form-field>    
+    
+        <div class='btnContainer' style='text-align: center'>
+            <button class="btn" type="button" mat-raised-button (click)="Encripta03()">Encripta v03</button>
+            <button class="btn" type="button" mat-raised-button (click)="Desencripta03()">Desencripta v03</button>
+            <button class="btn" type="button" mat-raised-button (click)="Encripta01()">Encripta v01</button>
+            <button class="btn" type="button" mat-raised-button (click)="Desencripta01()">Desencripta v01</button>
+        </div>
+    
+      </form> 
+</div>

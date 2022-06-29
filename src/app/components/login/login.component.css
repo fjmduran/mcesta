@@ -1,0 +1,77 @@
+.container{
+    margin: 0 auto;    
+    text-align: center;    
+    width: 90%;
+    max-width: 400px;
+}
+
+h3{
+    margin: 8px;
+}
+
+.cardContainer{
+    text-align: center;    
+    padding: 1rem;
+}
+
+.logo{            
+    border-radius: 50%;
+    border: 3px solid #3f51b5;
+    width: 20%;
+    margin-bottom: 1rem;
+}
+
+.error{
+    margin-top: -1rem;
+    color:red;
+}
+
+mat-form-field{    
+    width: 80%;    
+}
+
+.btnRegister{
+    width: 80%;
+    height: 3rem;
+    border-radius: 0.5rem;
+}
+
+.btn-social{        
+    width: 150px;    
+    border-radius: 0.5rem;            
+    text-align: center;        
+    padding: 10px;
+}
+
+/* .btn-google{
+    background-color: #dd4b39;
+} */
+
+.link{
+    color:black;
+    padding:0.5rem; 
+    border-radius: 0.5rem;
+    background-color: orange;
+}
+
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+  }
+   
+  .spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    margin-left: -20px;
+    border-radius: 50%;
+    border: 4px solid #ffffff;
+    border-top-color:#3f51b5;
+    animation: spinner .8s linear infinite;
+  }
+
+  

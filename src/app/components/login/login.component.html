@@ -1,0 +1,94 @@
+  <div class='container'>
+    <h3>{{texto}}</h3>
+      <div class="cardContainer">
+        <div *ngIf='!sigin'>
+          <form [formGroup]="LoginForm" (ngSubmit)="onLoginEmail()" *ngIf="!spinnerOn">
+
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input type='email' matInput placeholder="Email" formControlName='email'>
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+            <p class="error">{{ getErrorLogin('email')}}</p>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input type={{pwdType}} matInput placeholder="Password" formControlName='pwd'>
+              <mat-icon matSuffix (click)="changeVisibilidad()">{{pwdIcon}}</mat-icon>
+            </mat-form-field>
+            <p class="error">{{ getErrorLogin('pwd')}}</p>
+
+            <div class='buttonContainer' style='text-align: center'>
+              <button class="btnRegister" type="submit" color='primary' mat-raised-button [disabled]="LoginForm.invalid || boolSpinner" [class.spinner]="boolSpinner">
+                <mat-icon>account_circle</mat-icon> ACCEDER
+              </button>              
+            </div>
+
+            <hr style="margin-top: 1em;">
+            <div>
+              <p>O si lo prefieres, identifícate con tu cuenta de </p>              
+              <button class='btn-social' type="button" mat-raised-button (click)='onLoginGoogle()' [disabled]=boolSpinner>
+                <mat-icon svgIcon="google"></mat-icon>OOGLE
+              </button>
+            </div>  
+
+          </form>  
+          <br>        
+          <hr>
+          <p>¿Eres nuevo?</p>  
+          <div class='buttonContainer' style='text-align: center'>
+            <button class="btnRegister" type="button" mat-raised-button (click)='ShowRegister(true)'>
+              <mat-icon>vpn_key</mat-icon> REGÍSTRATE, ES GRATIS
+            </button>
+          </div>                             
+                  
+        </div>
+
+        <div *ngIf='sigin'>
+          <form [formGroup]="SiginForm" (ngSubmit)="OnSigIn()" *ngIf="!spinnerOn">
+
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input type='email' matInput placeholder="Email" formControlName='email'>
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+            <p>{{ getErrorSigin('email')}}</p>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Contraseña</mat-label>
+              <input type={{pwdType}} matInput placeholder="Contraseña" formControlName='pwd'>
+              <mat-icon matSuffix (click)="changeVisibilidad()">{{pwdIcon}}</mat-icon>
+            </mat-form-field>
+            <p>{{ getErrorSigin('pwd')}}</p>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Repite la contraseña</mat-label>
+              <input type={{pwdType}} matInput placeholder="Repite la contraseña" formControlName='repite_pwd'>
+              <mat-icon matSuffix (click)="changeVisibilidad()">{{pwdIcon}}</mat-icon>
+            </mat-form-field>
+            <p>{{ getErrorSigin('repite_pwd')}}</p>
+
+            <div class='buttonContainer'>
+              <button class="btnRegister" type="submit" color='primary' mat-raised-button [disabled]="SiginForm.invalid" [class.spinner]="boolSpinner">
+                <mat-icon>vpn_key</mat-icon> REGISTRAR
+              </button>
+            </div>
+
+          </form>
+
+          <br>
+          <hr>
+          <br>
+          ¿Ya estás registrado? &nbsp;
+          <br>
+          <br>          
+          <button class="btnRegister" type="button" mat-raised-button (click)='ShowRegister(false)'>
+            <mat-icon>account_circle</mat-icon> IDENTIFÍCATE
+          </button>          
+        </div>
+        <br>
+        <a href="https://fjmduran.com/contacto">¿Tiene alguna duda o sugerencia?</a>          
+      </div>
+
+        
+  </div>

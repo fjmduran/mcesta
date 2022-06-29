@@ -1,0 +1,33 @@
+<div class="filterTxt">
+  <mat-form-field appearance="outline">
+    <mat-label>Filtrar</mat-label>
+    <input
+      type="text"
+      matInput
+      placeholder="Filtrar"
+      autocomplete="off"
+      (keyup)="Search($event)"
+    />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-content>
+  <div class="bodyDialog">
+    <div *ngFor="let p of productosFiltered" class="mat-elevation-z5 containerProduct">
+      {{ p.nombre }}
+      <div class="check">
+        <mat-checkbox
+          type="checkbox"
+          color="primary"
+          (change)="OnChange($event, p)"
+        ></mat-checkbox>
+      </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions style="float: right">
+  <button class="btn" type="button" mat-raised-button mat-dialog-close><mat-icon>clear</mat-icon> Cerrar</button>
+  <button class="btn" color="primary" type="button" mat-raised-button color="primary" (click)="onSave()">
+    <mat-icon>save</mat-icon> Guardar
+  </button>
+</div>

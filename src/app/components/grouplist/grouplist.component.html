@@ -1,0 +1,26 @@
+<div class="container">
+    <app-spinner *ngIf="spinnerOn"></app-spinner>
+    <div style='text-align: right' *ngIf="!spinnerOn">
+        <div class="enunciado">
+            Grupos de <b>{{cesta.nombre}}</b>
+        </div>
+        <!-- <app-ad-sense></app-ad-sense> -->
+        <div *ngFor="let g of grupos" class="mat-elevation-z5 containerGroup">
+            {{g.nombre}}
+            <div style="text-align: right">
+                <button class='btnOpen' mat-mini-fab [routerLink]="['/productos', cesta.id, g.id]">
+                    <mat-icon>folder_open</mat-icon>
+                </button>
+                <button class='btnEdit' mat-mini-fab (click)='OpenDialog(g)'>
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </div>
+        </div>
+        <!-- <app-ad-sense></app-ad-sense> -->
+        <div class="btnAddContainer">
+            <button class="FAB btnAdd mat-elevation-z10" color="primary" mat-fab (click)="OpenDialog(null)">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

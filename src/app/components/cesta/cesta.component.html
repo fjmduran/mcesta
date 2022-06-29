@@ -1,0 +1,23 @@
+<form [formGroup]="mForm" class="container">
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input type='text' matInput placeholder="Nombre" formControlName='nombre'>
+  </mat-form-field>
+  <div *ngIf="cesta.id!=null">
+    Código para participar en la cesta {{cesta.nombre}}: <b>{{cesta.id}}</b>
+  </div>
+</form>
+<form [formGroup]="movilForm" class="container">
+  <mat-form-field appearance="outline" style="width: 60%;">
+    <mat-label>Tlfno móvil</mat-label>
+    <input type='number' matInput placeholder="Tlfno móvil" formControlName='movil' (keyup)="changeMovil()">
+  </mat-form-field>
+  <a class="whatsApp" mat-mini-fab [href]="sendWhatsApp" [disabled]="movilForm.invalid">
+    <mat-icon svgIcon="whatsapp"></mat-icon>
+  </a>
+</form>
+<hr>
+<div mat-dialog-actions class="btns">
+  <button class='btn' mat-button mat-dialog-close>Cerrar</button>
+  <button class='btn' color="primary" mat-button mat-dialog-close (click)="Save()">Guardar</button>
+</div>
