@@ -5,7 +5,7 @@ import { SelectProductsListComponent } from './../select-products-list/select-pr
 import { IGrupo } from './../../models/IGrupo';
 import { ICesta } from './../../models/ICesta';
 import { ApiService } from './../../services/api.service';
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, HostListener, NgZone, OnInit } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
       return of(localBasket);
     }
     
+    if(!this.auth.user) return;
     if(!this.auth.user.cesta){
       //no hay cesta predeterminada, abro la pantalla de listado de cestas
       this.router.navigate(['/cestas']);
@@ -150,7 +151,8 @@ export class HomeComponent implements OnInit {
     return styles;
   }
 
-  ngOnDestroy(){
+  @HostListener('window:beforeunload')
+  async ngOnDestroy(){    
     this.auth.setLocalBasket(this.grupos);
     for(let s of this.subscriptions){
       s.unsubscribe();
