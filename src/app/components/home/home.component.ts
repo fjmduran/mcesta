@@ -6,7 +6,7 @@ import { IGrupo } from './../../models/IGrupo';
 import { ICesta } from './../../models/ICesta';
 import { ApiService } from './../../services/api.service';
 import { Component, NgZone, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   private subscriptions: Subscription[]=[];
   private grupos:IGrupo[]=[];
   private productos:IProducto[]=[];
-  public pendientes:IProducto[]=[];
+  public pendientes:IProducto[];
   public prodChecked:IProducto[]=[];
   private idCesta:string;
   public msgEmpty:string='La cesta está vacía';
@@ -44,45 +44,60 @@ export class HomeComponent implements OnInit {
     
   }
 
-  public loadCesta(user:IUser):Observable<ICesta>{
-    if(!user.cesta){
+  public loadCesta():Observable<ICesta>{
+    
+    const localBasket:ICesta = this.auth.getLocalBasket();
+
+    if(!this.auth.user && localBasket){
+      this.grupos=localBasket.grupos;
+      if(!this.pendientes){
+        this.toOrderProducts();
+      }      
+      return of(localBasket);
+    }
+    
+    if(!this.auth.user.cesta){
       //no hay cesta predeterminada, abro la pantalla de listado de cestas
       this.router.navigate(['/cestas']);
-    }else{
+    }else{      
       if (this.cesta$) return this.cesta$;
-      this.idCesta=user.cesta.id;     
-      this.cesta$=this.api.GetCesta(user.cesta.id);
+      this.idCesta=this.auth.user.cesta.id;     
+      this.cesta$=this.api.GetCesta(this.auth.user.cesta.id);
 
       this.$grupos=this.api.GetGruposCesta(this.idCesta).subscribe(data=>{
         this.grupos=data;
-        this.grupos=this.grupos.sort((a,b)=>{
-          return a.orden - b.orden;
-        });
-        this.productos=[];
-        this.pendientes=[];
-        for(let g of this.grupos){        
-          if(g.productos!=null){
-            let prod:IProducto[]=g.productos;
-            let pend:IProducto[]=g.productos;
-  
-            //Filtro los productos que no están pendientes para el FAB
-            prod=prod.filter(p=>{
-              p.idGrupo=g.id; //añado a cada producto su idgrupo            
-              return p.pendiente==false;
-            });    
-            this.productos=this.productos.concat(prod);
-            
-            //Filtro los productos pendientes          
-            pend=pend.filter(p=>{                     
-              return p.pendiente==true;
-            });            
-            this.pendientes=this.pendientes.concat(pend);       
-          }
-        };
+        this.toOrderProducts();
       });
       this.subscriptions.push(this.$grupos);
       return this.cesta$;
     }
+  }
+
+  private toOrderProducts(){
+    this.grupos=this.grupos.sort((a,b)=>{
+      return a.orden - b.orden;
+    });
+    this.productos=[];
+    this.pendientes=[];
+    for(let g of this.grupos){        
+      if(g.productos!=null){
+        let prod:IProducto[]=g.productos;
+        let pend:IProducto[]=g.productos;
+
+        //Filtro los productos que no están pendientes para el FAB
+        prod=prod.filter(p=>{
+          p.idGrupo=g.id; //añado a cada producto su idgrupo            
+          return p.pendiente==false;
+        });    
+        this.productos=this.productos.concat(prod);
+        
+        //Filtro los productos pendientes          
+        pend=pend.filter(p=>{                     
+          return p.pendiente==true;
+        });            
+        this.pendientes=this.pendientes.concat(pend);       
+      }
+    };
   }
 
   public CheckProduct(producto:IProducto):void{
@@ -136,6 +151,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnDestroy(){
+    this.auth.setLocalBasket(this.grupos);
     for(let s of this.subscriptions){
       s.unsubscribe();
     }

@@ -6,6 +6,8 @@ import { Observable, of, Subscription } from "rxjs";
 import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
 import firebase from "firebase/compat/app";
+import { ICesta } from "../models/ICesta";
+import { IGrupo } from "../models/IGrupo";
 
 @Injectable({
   providedIn: "root",
@@ -109,8 +111,19 @@ export class AuthService {
     return this.afsAuth.createUserWithEmailAndPassword(email, pwd);
   }
 
+  public setLocalBasket(groups:IGrupo[]):void{
+    this.user.cesta.grupos=groups;
+    const basketString= JSON.stringify(this.user.cesta);
+    localStorage.setItem("localBasket", basketString);
+  }
+  
+  public getLocalBasket():ICesta{
+    return JSON.parse(localStorage.getItem("localBasket"));
+  }
+
   public logOut(): Promise<void> {
     this.user=null;
+    localStorage.removeItem("localBasket");
     this.userSubscription.unsubscribe();
     return this.afsAuth.signOut();
   }
