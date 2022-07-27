@@ -120,19 +120,19 @@ export class HomeComponent implements OnInit {
       if (result!=null && result!=""){
         let p:IProducto[]=result;
         this.api.SaveProductS(p,this.grupos,this.idCesta);
+        this.auth.setLocalBasket(this.grupos);
       }
       ;
     })
   }
 
   public cleanCesta():void{
-    
     this.prodChecked.forEach(prod=>{
       prod.check=false;
       prod.pendiente=false;
       return;
     });
-
+    this.auth.setLocalBasket(this.grupos);
     this.api.SaveProductS(this.prodChecked, this.grupos, this.idCesta);
     this.prodChecked=[];
   }
