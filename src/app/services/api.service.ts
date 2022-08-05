@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { IGrupo } from '../models/IGrupo';
 import { IProducto } from '../models/IProducto';
 
-import {getId} from '../../../../common/src/helpers/getId.helper';
+import {getIdFromName} from '../../../../common/src/helpers/id.helper';
 
 @Injectable({
   providedIn: 'root'
@@ -62,7 +62,7 @@ export class ApiService {
 
   public SaveGroup(grupo: IGrupo, idCesta: string): void {
     if (!grupo.id) {
-      const id: string = getId.getIdFromName(grupo.nombre);
+      const id: string = getIdFromName(grupo.nombre);
       grupo.id=id;
       this.afs.collection("/cestas/" + idCesta + "/grupos").doc(id).set(grupo);
     } else {

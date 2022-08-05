@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
   private cesta$:Observable<ICesta>;
   private $grupos:Subscription;
   
-  constructor(private auth:AuthService, private api:ApiService, public dialog: MatDialog, private router: Router,private ngZone: NgZone) { }
+  constructor(public auth:AuthService, private api:ApiService, public dialog: MatDialog, private router: Router,private ngZone: NgZone) { }
 
   ngOnInit() {   
     this.auth.afsAuth.onAuthStateChanged((user) => {
@@ -144,10 +144,13 @@ export class HomeComponent implements OnInit {
     return styles;
   }
 
-  public ColorChange(producto:IProducto):any{
-    let styles = {
-      'background-color': producto.check ? 'orange' : 'green',      
-    };
+  public ColorChange(producto:IProducto){
+    let styles = {'background-color': producto.check ? 'orange' : 'green'};
+    if(!this.auth.user){
+     styles = {
+        'background-color': 'gray'
+      };
+    }    
     return styles;
   }
 

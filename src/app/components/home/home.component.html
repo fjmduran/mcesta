@@ -37,6 +37,7 @@
             class="btnOpen"
             mat-mini-fab
             (click)="CheckProduct(p)"
+            [disabled]="!auth.user"
             [ngStyle]="ColorChange(p)"
           >
             <mat-icon>check</mat-icon>
