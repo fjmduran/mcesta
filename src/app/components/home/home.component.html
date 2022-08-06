@@ -48,7 +48,7 @@
       <br />
     </ng-container>
   </div>
-  <empty-list [msg]="msgEmpty" *ngIf="pendientes?.length === 0"></empty-list>
+  <empty-list [msg]="msgEmpty" *ngIf="pendientes?.length === 0 && auth.user"></empty-list>
   <!-- <app-ad-sense></app-ad-sense> -->
 </div>
 <div class="bottomButtons">
