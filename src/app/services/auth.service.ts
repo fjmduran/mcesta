@@ -1,19 +1,18 @@
 import { Injectable, NgZone } from "@angular/core";
 import { IUser } from "../models/IUser";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
-import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { Observable, of, Subscription } from "rxjs";
 import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
 import firebase from "firebase/compat/app";
 import { ICesta } from "../models/ICesta";
 import { IGrupo } from "../models/IGrupo";
+import { DatabaseService } from "./database.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
-
   private userFirebase: firebase.User;
   public user$: Observable<IUser>;
   public user: IUser;
@@ -21,18 +20,18 @@ export class AuthService {
 
   constructor(
     public afsAuth: AngularFireAuth,
-    private afs: AngularFirestore,
+    private afs: DatabaseService,
     private router: Router,
     private ngZone: NgZone
   ) {
     this.afsAuth.onAuthStateChanged((user) => {
-      this.userFirebase=user;
+      this.userFirebase = user;
       if (!this.userFirebase) {
         this.ngZone.run(() => {
-          this.router.navigateByUrl('/auth');
+          this.router.navigateByUrl("/login");
         });
         return;
-      }else{
+      } else {
         this.checkUser();
       }
     });
@@ -40,6 +39,7 @@ export class AuthService {
 
   logInEmail(email: string, password: string): Observable<IUser[]> {
     return this.afs
+      .getDatabase()
       .collection<IUser>("usuarios", (ref) => {
         let query: firebase.firestore.Query = ref;
         query = query.where("email", "==", email);
@@ -57,7 +57,10 @@ export class AuthService {
       );
   }
 
-  loginFirebaseEmail(email: string, pwd: string): Promise<firebase.auth.UserCredential> {
+  loginFirebaseEmail(
+    email: string,
+    pwd: string
+  ): Promise<firebase.auth.UserCredential> {
     return this.afsAuth.signInWithEmailAndPassword(email, pwd);
   }
 
@@ -70,7 +73,7 @@ export class AuthService {
       this.user$ = this.getUserById(this.userFirebase.email);
       this.userSubscription = this.user$.subscribe((data) => {
         this.user = data;
-        console.log('Usuario OK');
+        console.log("Usuario OK");
       });
     } else {
       if (this.userSubscription) {
@@ -83,7 +86,8 @@ export class AuthService {
 
   public getUserById(id: string): Observable<IUser> {
     return this.afs
-      .doc<IUser>('/usuarios/' + id)
+      .getDatabase()
+      .doc<IUser>("/usuarios/" + id)
       .snapshotChanges()
       .pipe(
         map((action) => {
@@ -100,29 +104,36 @@ export class AuthService {
   public saveUser(user: IUser): void {
     if (!user.id) {
       //usuario nuevo
-      this.afs.collection("/usuarios").doc(user.email).set(user);
+      this.afs.getDatabase().collection("/usuarios").doc(user.email).set(user);
       console.log("Usuario añadido");
     } else {
-      this.afs.doc("/usuarios/" + user.id).update(user);
+      this.afs
+        .getDatabase()
+        .doc("/usuarios/" + user.id)
+        .update(user);
     }
   }
 
-  siginFirebaseEmail(email: string, pwd: string): Promise<firebase.auth.UserCredential> {
+  siginFirebaseEmail(
+    email: string,
+    pwd: string
+  ): Promise<firebase.auth.UserCredential> {
     return this.afsAuth.createUserWithEmailAndPassword(email, pwd);
   }
 
-  public setLocalBasket(groups:IGrupo[]):void{
-    this.user.cesta.grupos=groups;
-    const basketString= JSON.stringify(this.user.cesta);
+  public setLocalBasket(groups: IGrupo[]): void {
+    if (!this.user) return;
+    this.user.cesta.grupos = groups;
+    const basketString = JSON.stringify(this.user.cesta);
     localStorage.setItem("localBasket", basketString);
   }
-  
-  public getLocalBasket():ICesta{
+
+  public getLocalBasket(): ICesta {
     return JSON.parse(localStorage.getItem("localBasket"));
   }
 
   public logOut(): Promise<void> {
-    this.user=null;
+    this.user = null;
     localStorage.removeItem("localBasket");
     this.userSubscription.unsubscribe();
     return this.afsAuth.signOut();

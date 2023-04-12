@@ -133,9 +133,7 @@ export class LoginComponent {
       cestas: [],
     };
     const sub: Subscription = this.auth.getUserById(usuario.id).subscribe(
-      data => {
-        console.log(data);
-        
+      data => {        
         if (!data) {
           this.auth.saveUser(usuario);
         }

@@ -38,7 +38,7 @@ export class CestasComponent implements OnInit {
         this.user$ = this.auth.user$;
       } else {
         this.ngZone.run(() => {
-          this.router.navigateByUrl("/auth");
+          this.router.navigateByUrl("/login");
         });
       }
     });
@@ -50,7 +50,7 @@ export class CestasComponent implements OnInit {
       data: { cesta: cesta, user },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result == null || result == []) return;
+      if (result == null || result.length===0) return;
       let cesta: ICesta = result;
       let nueva: boolean;
       if (cesta.id == null) nueva = true;
