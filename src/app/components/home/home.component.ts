@@ -44,18 +44,7 @@ export class HomeComponent implements OnInit {
     
   }
 
-  public loadCesta():Observable<ICesta>{
-    
-    const localBasket:ICesta = this.auth.getLocalBasket();
-
-    if(!this.auth.user && localBasket){
-      this.grupos=localBasket.grupos;
-      if(!this.pendientes){
-        this.toOrderProducts();
-      }      
-      return of(localBasket);
-    }
-    
+  public loadCesta():Observable<ICesta>{      
     if(!this.auth.user) return;
     if(!this.auth.user.cesta){
       //no hay cesta predeterminada, abro la pantalla de listado de cestas
@@ -119,8 +108,7 @@ export class HomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result!=null && result!=""){
         let p:IProducto[]=result;
-        this.api.SaveProductS(p,this.grupos,this.idCesta);
-        this.auth.setLocalBasket(this.grupos);
+        this.api.SaveProductS(p,this.grupos,this.idCesta);        
       }
       ;
     })
@@ -131,8 +119,7 @@ export class HomeComponent implements OnInit {
       prod.check=false;
       prod.pendiente=false;
       return;
-    });
-    this.auth.setLocalBasket(this.grupos);
+    });    
     this.api.SaveProductS(this.prodChecked, this.grupos, this.idCesta);
     this.prodChecked=[];
   }
@@ -156,7 +143,6 @@ export class HomeComponent implements OnInit {
 
   @HostListener('window:beforeunload')
   async ngOnDestroy(){    
-    this.auth.setLocalBasket(this.grupos);
     for(let s of this.subscriptions){
       s.unsubscribe();
     }

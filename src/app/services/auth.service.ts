@@ -121,20 +121,8 @@ export class AuthService {
     return this.afsAuth.createUserWithEmailAndPassword(email, pwd);
   }
 
-  public setLocalBasket(groups: IGrupo[]): void {
-    if (!this.user) return;
-    this.user.cesta.grupos = groups;
-    const basketString = JSON.stringify(this.user.cesta);
-    localStorage.setItem("localBasket", basketString);
-  }
-
-  public getLocalBasket(): ICesta {
-    return JSON.parse(localStorage.getItem("localBasket"));
-  }
-
   public logOut(): Promise<void> {
-    this.user = null;
-    localStorage.removeItem("localBasket");
+    this.user = null;    
     this.userSubscription.unsubscribe();
     return this.afsAuth.signOut();
   }

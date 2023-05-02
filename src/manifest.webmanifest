@@ -1,6 +1,6 @@
 {
-  "name": "Mi cesta",
-  "short_name": "Mi cesta",
+  "name": "Mi cesta del súper",
+  "short_name": "Cesta",
   "theme_color": "#3f51b5",
   "background_color": "#3f51b5",
   "display": "standalone",
