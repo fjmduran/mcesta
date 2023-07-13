@@ -102,7 +102,8 @@ export class ApiService {
   ) {
     let idGrupos: string[] = [];
 
-    productos.forEach((prod) => {
+    for (let prod of productos){
+
       //analizo para cada producto qué grupo tiene y obtengo un array de los grupos a guardar
       let existe: boolean = false;
       for (let id of idGrupos) {
@@ -110,27 +111,27 @@ export class ApiService {
       }
       if (!existe) idGrupos.push(prod.idGrupo);
 
-      //analiza que grupo es el que tiene el producto
+      //analiza qué grupo es el que tiene el producto
       for (let grupo of grupos) {
         if (grupo.id == prod.idGrupo) {
           //busco el producto para modificarlo
           for (let p of grupo.productos) {
-            if (p.id == prod.id) {
+            if (p.id == prod.id) {             
               p = prod;
               break;
             }
           }
         }
       }
-    });
+    }
 
     //para cada idGrupo busco su grupo y lo guardo
-    idGrupos.forEach((id) => {
+    for(let id of idGrupos){
       for (let g of grupos) {
         if (g.id == id) {
-          this.SaveGroup(g, idCesta);
+          this.SaveGroup(g, idCesta);          
         }
       }
-    });
+    }
   }
 }
