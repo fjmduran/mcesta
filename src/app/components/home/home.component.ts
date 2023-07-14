@@ -124,7 +124,7 @@ export class HomeComponent implements OnInit {
               products = `${products}, ${prod.nombre}`;
             }
           });
-          products = `${products} a la lista`;
+          products = `${products} a la lista`;          
           this._snackBar.open(products, "Cerrar", { duration: 5000 });
         }
 

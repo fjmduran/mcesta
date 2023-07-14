@@ -100,7 +100,7 @@ export class ApiService {
     grupos: IGrupo[],
     idCesta: string
   ) {
-    let idGrupos: string[] = [];
+    /*  let idGrupos: string[] = [];
 
     for (let prod of productos){
 
@@ -123,15 +123,20 @@ export class ApiService {
           }
         }
       }
-    }
+    } */
 
     //para cada idGrupo busco su grupo y lo guardo
-    for(let id of idGrupos){
+    /*  for(let id of idGrupos){
       for (let g of grupos) {
         if (g.id == id) {
           this.SaveGroup(g, idCesta);          
         }
       }
+    } */
+        
+    for (let product of productos) {
+      const g = grupos.find((g) => g.id === product.idGrupo);
+      this.SaveGroup(g, idCesta);
     }
   }
 }
