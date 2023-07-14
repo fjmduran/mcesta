@@ -33,8 +33,7 @@ export class HomeComponent implements OnInit {
     private api: ApiService,
     public dialog: MatDialog,
     private router: Router,
-    private ngZone: NgZone,
-    private _snackBar: MatSnackBar
+    private ngZone: NgZone,    
   ) {}
 
   ngOnInit() {
@@ -116,19 +115,10 @@ export class HomeComponent implements OnInit {
         const productsForBuy = result.filter((product) => product.pendiente);
 
         if (productsForBuy.length > 0) {
-          let products = null;
-          productsForBuy.forEach((prod) => {
-            if (!products) {
-              products = `✅ ${prod.nombre}`;
-            } else {
-              products = `${products}, ${prod.nombre}`;
-            }
-          });
-          products = `${products} a la lista`;          
-          this._snackBar.open(products, "Cerrar", { duration: 5000 });
+          this.api.SaveProductS(productsForBuy, this.grupos, this.idCesta); 
         }
 
-        this.api.SaveProductS(productsForBuy, this.grupos, this.idCesta);
+        
       }
     });
   }

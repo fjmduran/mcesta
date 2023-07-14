@@ -8,12 +8,13 @@ import { IProducto } from "../models/IProducto";
 import { getIdFromName } from "../../../../common/src/helpers/id.helper";
 import firebase from "firebase/compat";
 import { DatabaseService } from "./database.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: "root",
 })
 export class ApiService {
-  constructor(private afs: DatabaseService) {}
+  constructor(private afs: DatabaseService, private _snackBar: MatSnackBar) {}
 
   public GetCesta(id: string): Observable<ICesta> {
     return this.afs
@@ -134,9 +135,27 @@ export class ApiService {
       }
     } */
         
+    let productsForBuy;
+    
+    const groupsSaved:IGrupo[]=[];
     for (let product of productos) {
+      
       const g = grupos.find((g) => g.id === product.idGrupo);
-      this.SaveGroup(g, idCesta);
+      const groupIndex=groupsSaved.findIndex(gr=>gr.id===g.id);
+      if(groupIndex===-1){
+        const productsToBuyInGroup=g.productos.filter(p=>p.pendiente===true);
+        productsToBuyInGroup.forEach(pToBuy=>{
+          if (!productsForBuy) {
+            productsForBuy = `✅ ${pToBuy.nombre}`;
+          } else {
+            productsForBuy = `${productsForBuy}, ${pToBuy.nombre}`;
+          }
+        })
+        this.SaveGroup(g, idCesta);
+        groupsSaved.push(g);
+      }     
     }
+    productsForBuy+=' a la lista'
+    this._snackBar.open(productsForBuy, "Cerrar", { duration: 5000 });
   }
 }
