@@ -79,17 +79,17 @@ export class ApiService {
       );
   }
 
-  public SaveGroup(grupo: IGrupo, idCesta: string): void {
+  public SaveGroup(grupo: IGrupo, idCesta: string): Promise<void> {
     if (!grupo.id) {
       const id: string = getIdFromName(grupo.nombre);
       grupo.id = id;
-      this.afs
+      return this.afs
         .getDatabase()
         .collection("/cestas/" + idCesta + "/grupos")
         .doc(id)
         .set(grupo);
     } else {
-      this.afs
+      return this.afs
         .getDatabase()
         .doc("/cestas/" + idCesta + "/grupos/" + grupo.id)
         .update(grupo);
@@ -99,63 +99,33 @@ export class ApiService {
   public SaveProductS(
     productos: IProducto[],
     grupos: IGrupo[],
-    idCesta: string
+    idCesta: string,
+    cleanProducts = false
   ) {
-    /*  let idGrupos: string[] = [];
+    let nameOfProductsToBuy;
+    const groupsToSave = [];
 
-    for (let prod of productos){
-
-      //analizo para cada producto qué grupo tiene y obtengo un array de los grupos a guardar
-      let existe: boolean = false;
-      for (let id of idGrupos) {
-        if (id == prod.idGrupo) existe = true;
+    for (let p of productos) {
+      if (!nameOfProductsToBuy) {
+        nameOfProductsToBuy = `✅ ${p.nombre}`;
+      } else {
+        nameOfProductsToBuy = `${nameOfProductsToBuy}, ${p.nombre}`;
       }
-      if (!existe) idGrupos.push(prod.idGrupo);
 
-      //analiza qué grupo es el que tiene el producto
-      for (let grupo of grupos) {
-        if (grupo.id == prod.idGrupo) {
-          //busco el producto para modificarlo
-          for (let p of grupo.productos) {
-            if (p.id == prod.id) {             
-              p = prod;
-              break;
-            }
-          }
-        }
-      }
-    } */
-
-    //para cada idGrupo busco su grupo y lo guardo
-    /*  for(let id of idGrupos){
-      for (let g of grupos) {
-        if (g.id == id) {
-          this.SaveGroup(g, idCesta);          
-        }
-      }
-    } */
-        
-    let productsForBuy;
-    
-    const groupsSaved:IGrupo[]=[];
-    for (let product of productos) {
-      
-      const g = grupos.find((g) => g.id === product.idGrupo);
-      const groupIndex=groupsSaved.findIndex(gr=>gr.id===g.id);
-      if(groupIndex===-1){
-        const productsToBuyInGroup=g.productos.filter(p=>p.pendiente===true);
-        productsToBuyInGroup.forEach(pToBuy=>{
-          if (!productsForBuy) {
-            productsForBuy = `✅ ${pToBuy.nombre}`;
-          } else {
-            productsForBuy = `${productsForBuy}, ${pToBuy.nombre}`;
-          }
-        })
-        this.SaveGroup(g, idCesta);
-        groupsSaved.push(g);
-      }     
+      const groupOfproduct = grupos.find((g) => g.id === p.idGrupo);
+      const checkExistGroupToSave = groupsToSave.find(
+        (g) => g === groupOfproduct
+      );
+      if (groupOfproduct && !checkExistGroupToSave)
+        groupsToSave.push(groupOfproduct);
     }
-    productsForBuy+=' a la lista'
-    this._snackBar.open(productsForBuy, "Cerrar", { duration: 5000 });
+
+    for (let group of groupsToSave) {
+      this.SaveGroup(group, idCesta);
+    }
+
+    nameOfProductsToBuy += " a la lista";
+    if (!cleanProducts)
+      this._snackBar.open(nameOfProductsToBuy, "Cerrar", { duration: 5000 });
   }
 }

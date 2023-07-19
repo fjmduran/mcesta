@@ -129,7 +129,7 @@ export class HomeComponent implements OnInit {
       prod.pendiente = false;
       return;
     });
-    this.api.SaveProductS(this.prodChecked, this.grupos, this.idCesta);
+    this.api.SaveProductS(this.prodChecked, this.grupos, this.idCesta,true);
     this.prodChecked = [];
   }
 
