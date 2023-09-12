@@ -30,11 +30,15 @@ export class SelectProductsListComponent implements OnInit {
   }
 
   public Search(event: any): void {
-    let textSearch: string = String(event.target.value).toLowerCase();
+    let textSearch: string = this.removeAccent(String(event.target.value));
 
     this.productosFiltered = this.productosBrutos.filter((p) => {
-      return p.nombre.toLowerCase().includes(textSearch) === true;
+      return this.removeAccent(p.nombre).includes(textSearch) === true;
     });
+  }
+
+  private removeAccent(input:string):string{
+    return input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
   }
 
   public OnChange(event: any, p: IProducto): void {
