@@ -8,6 +8,7 @@ import firebase from "firebase/compat/app";
 import { ICesta } from "../models/ICesta";
 import { IGrupo } from "../models/IGrupo";
 import { DatabaseService } from "./database.service";
+import { ApiService } from "./api.service";
 
 @Injectable({
   providedIn: "root",
@@ -22,7 +23,8 @@ export class AuthService {
     public afsAuth: AngularFireAuth,
     private afs: DatabaseService,
     private router: Router,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private apiService:ApiService
   ) {
     this.afsAuth.onAuthStateChanged((user) => {
       this.userFirebase = user;
@@ -74,6 +76,7 @@ export class AuthService {
       this.userSubscription = this.user$.subscribe((data) => {
         this.user = data;
         console.log("Usuario OK");
+        this.apiService.refresh_cache(this.user.cesta.id);
       });
     } else {
       if (this.userSubscription) {

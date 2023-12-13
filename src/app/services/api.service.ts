@@ -1,12 +1,11 @@
 import { ICesta } from "src/app/models/ICesta";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, take } from "rxjs/operators";
 import { IGrupo } from "../models/IGrupo";
 import { IProducto } from "../models/IProducto";
 
 import { getIdFromName } from "../../../../common/src/helpers/id.helper";
-import firebase from "firebase/compat";
 import { DatabaseService } from "./database.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
@@ -14,7 +13,24 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   providedIn: "root",
 })
 export class ApiService {
-  constructor(private afs: DatabaseService, private _snackBar: MatSnackBar) {}
+  constructor(private afs: DatabaseService, private _snackBar: MatSnackBar) {
+    
+  }
+
+  public refresh_cache(id_cesta:string){
+    const docRef = this.afs.getDatabase().collection("/cestas/").doc(id_cesta);
+
+    // Obtener los datos más recientes
+    docRef.get({ source: 'server' }).pipe(
+      take(1)
+    ).subscribe((doc) => {
+      this.GetGruposCesta(id_cesta).pipe(
+        take(1)
+      ).subscribe(data=>{
+        console.log(data);        
+      })
+    });
+  }
 
   public GetCesta(id: string): Observable<ICesta> {
     return this.afs
