@@ -49,8 +49,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  public loadCesta(): Observable<ICesta> {
-    if (!this.auth.user) return;
+  public loadCesta(): Observable<ICesta> {    
     if (!this.auth.user.cesta) {
       //no hay cesta predeterminada, abro la pantalla de listado de cestas
       this.router.navigate(["/cestas"]);

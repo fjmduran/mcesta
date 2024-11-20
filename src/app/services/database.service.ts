@@ -7,8 +7,7 @@ import { enableIndexedDbPersistence } from 'firebase/firestore';
 })
 export class DatabaseService {
     
-  constructor(private afs: AngularFirestore) { 
-    //console.error('❌ Caché sin activar ');
+  constructor(private afs: AngularFirestore) {     
     enableIndexedDbPersistence(this.afs.firestore)
       .then(() => {
         console.log('✅ Persistencia habilitada en el índice de la base de datos');

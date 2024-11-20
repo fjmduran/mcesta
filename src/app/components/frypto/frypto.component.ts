@@ -191,12 +191,12 @@ export class FryptoComponent implements OnInit {
         //SI LLEGO AQUÍ ES QUE NO SE HA ENCONTRADO EL CARÁCTER EN EL STRING DE UNCODE
         resultado = resultado + char;
       } else {
-        resultado = resultado + this.code03[miIndice].charAt(index);
-        if (miIndice == 9) {
-          miIndice = 0;
-        } else {
-          miIndice++;
-        }
+        resultado = resultado + this.code03[miIndice].charAt(index);        
+      }
+      if (miIndice == 9) {
+        miIndice = 0;
+      } else {
+        miIndice++;
       }
     }
 

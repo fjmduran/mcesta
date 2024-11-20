@@ -3,7 +3,7 @@
     <app-spinner></app-spinner>
   </ng-template>
 
-  <div>
+  <div *ngIf="user$ | async as user; else loading">
     <ng-container *ngIf="loadCesta() | async as cesta; else loading">
       <div class="enunciado">
         Cesta: <b>{{ cesta.nombre }}</b>

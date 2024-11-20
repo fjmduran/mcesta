@@ -75,8 +75,7 @@ export class AuthService {
       this.user$ = this.getUserById(this.userFirebase.email);
       this.userSubscription = this.user$.subscribe((data) => {
         this.user = data;
-        console.log("Usuario OK");
-        this.apiService.refresh_cache(this.user.cesta.id);
+        console.log("Usuario OK");        
       });
     } else {
       if (this.userSubscription) {

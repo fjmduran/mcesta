@@ -17,21 +17,6 @@ export class ApiService {
     
   }
 
-  public refresh_cache(id_cesta:string){
-    const docRef = this.afs.getDatabase().collection("/cestas/").doc(id_cesta);
-
-    // Obtener los datos más recientes
-    docRef.get({ source: 'server' }).pipe(
-      take(1)
-    ).subscribe((doc) => {
-      this.GetGruposCesta(id_cesta).pipe(
-        take(1)
-      ).subscribe(data=>{
-        console.log(data);        
-      })
-    });
-  }
-
   public GetCesta(id: string): Observable<ICesta> {
     return this.afs
       .getDatabase()
