@@ -1,2 +1,184 @@
-# Versión 1.2
-- Se ha incluido el enableIndexedDbPersistence de Firebase
+CÓDIGO PARA EL PLAYGROUND DE TYPESCRIPT
+``````
+const uncode03: string = "abcdefghijklmnñopqrstuvwxyz0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ,.-;:_!·$%&()=?¿/";
+const code03: string[] = [
+    "2/wvlHqM4·CñTXÑ,k-o=edZ6BijrcVJLuE.Y7&WgPSa95y¿_Q8Ux1D)mO0hsfG?KI(tAFzRn;%N$:p!b3",
+    "lz/H)i8$aLt_yVG2%UgS;:ovP1(E¿DRfK&se3mn0Fwkuj5WJT,7Zc6IM=b-Ñp!·AYñr9BC?QNXh4O.dqx",
+    "!86/Gg:hYu_0?O4$HPoIñR2Wi.etE9%LrwNsBcqJ5,faFz7&MTdÑZlbVDXy-¿KCv1pk;jnQSU(xA)3m=·",
+    "Zkg_/ÑLd.O(QI:r,qBemz%Yl;1&59JGWAnRM8?wb7cfKUFS4-C)ys6=T¿ap3PoDñhjuEtN0xvi!H$2XV·",
+    "z=j!a/3,ÑxN5deT(QHDp)&Msl4B7.FI0E?fXRCK¿;nPrLo$Y2uSOñWg%JU·16_biGq-c:ZtkVyv9mw8Ah",
+    "P;EkrW/u%RxYo1tOm4S&Bvj2whif$38:¿AGFg_cDZQT-q·HMXLC9pz.I7JnadU0VyK()=,5ñles!N6bÑ?",
+    "TWfl-)&/xbG·vY;EAOQDSqP%Vkz.I4_d2X,:c(8$LgUMÑ7ueRZysñ6FnaNr¿1jt!m953?hBCoKJHp=iw0",
+    "xud1S-q=/4EQk)lej:(L_NMHPZBUR;m·8yisJc97Cñ$p%I¿5Yar0OnfKTV2DogFtwWv!.&6bAGh,X3?zÑ",
+    "2HyISeE,$/Lq9?YW!RÑ%QpC=mhPO54;Awuc.)ZgJb¿dFB-8znUx0Vjr_X7i1(satfk:ñ&·MlGoTK3N6vD",
+    "rP7YWf)!hi/-n8¿xsZ31G4cyTt2w·aupe6$BRJ_HlX&mLqjVñI;voAzN0E,ÑK:d=%(SUFMDQ?.gC5O9kb"
+];
+
+function Encripta03(toEncrypt: string): string {
+    let e: string = toEncrypt;
+
+    let resultado: string = "";
+
+    //EN EL STRING DE UNCODE HAY 81 ELEMENTOS		
+
+    //los tres primeros caracteres serán aleatorios
+    for (let i: number = 0; i <= 2; i++) {
+        let z: number = Math.trunc(Math.random() * 81);
+        resultado = resultado + uncode03.charAt(z);
+    }
+
+    //OBTENGO UN VALOR ALEATORIO ENTRE 0 Y 9 (AMBOS INCLUIDOS), QUE ME DARÁ EL ÍNDICE DEL ARRAY A USAR DE CODE
+    let indice: number = Math.trunc(Math.random() * 10);
+    let strIndice: string = indice.toString();
+
+    //OBTENGO EL INDEX DEL INDICE OBTENIDO EN UNCODE
+    let indexIndice: number = uncode03.indexOf(strIndice);
+
+    //AHORA LO CODIFICO SEGÚN EL ARRAY 0 DE CODE   
+    let s: string = code03[0].charAt(indexIndice);
+    resultado = resultado + s;
+
+    //AHORA UN VALOR ALEATORIO
+    for (let i: number = 0; i < 1; i++) {
+        let z: number = Math.random() * 81;
+        resultado = resultado + uncode03.charAt(z);
+    }
+
+    //AHORA OBTENGO LA LONGITUD DE LA CLAVE A ENCRIPTAR Y AÑADO EL PRIMER DÍGITO DE SU LONGITUD
+    let lengthClave = e.length;
+
+    let primerN: number = Math.trunc(lengthClave / 10);
+    let segundoN: number = lengthClave - primerN * 10;
+
+    let strNum: string = primerN.toString();
+    let indexNum: number = uncode03.indexOf(strNum);
+    let charNum: string = code03[indice].charAt(indexNum);
+    resultado = resultado + charNum;
+
+    //AHORA NÚMERO ALEATORIO
+    for (let i: number = 0; i < 1; i++) {
+        let z: number = Math.trunc(Math.random() * 80);
+        resultado = resultado + code03[Math.trunc(Math.random() * 10)].charAt(z);
+    }
+
+    //AHORA SEGUNDO DÍGITO DE LA LONGITUD DE LA CLAVE
+    strNum = segundoN.toString();
+    indexNum = uncode03.indexOf(strNum);
+    charNum = code03[indice].charAt(indexNum);
+    resultado = resultado + charNum;
+
+    //AHORA DOS CARACTERES ALEATORIOS
+    for (let i: number = 0; i <= 1; i++) {
+        let z: number = Math.trunc(Math.random() * 80);
+        resultado = resultado + code03[Math.trunc(Math.random() * 10)].charAt(z);
+    }
+
+    //Ahora codifico cada una de las letras de la palabra a encriptar
+    let miIndice: number = indice;
+    for (let i: number = 0; i < e.length; i++) {
+        let char: string = e.slice(i, i + 1);
+        let index: number = uncode03.indexOf(char.toString());
+        if (index === -1) {
+            //SI LLEGO AQUÍ ES QUE NO SE HA ENCONTRADO EL CARÁCTER EN EL STRING DE UNCODE
+            resultado = resultado + char;
+        } else {
+            resultado = resultado + code03[miIndice].charAt(index);
+        }
+        if (miIndice == 9) {
+            miIndice = 0;
+        } else {
+            miIndice++;
+        }
+    }
+
+    //AHORA AÑADO CARACTERES ALEATORIOS HASTA LOS 50 CARACTERES
+    let i: number = 1;
+    while (resultado.length < 50) {
+        let r: number = Math.trunc((Math.random() * 80));
+        resultado = resultado + code03[indice].charAt(r);
+        i++;
+    }
+    return resultado;
+}
+
+function Desencripta03(toDesencrypt: string): string {
+    let d: string = toDesencrypt;
+
+    let resultado = "";
+    if (!d) return "";
+
+    let strIndiceArray: string = d.substring(3, 4);
+    let IndiceArray: number = Number(DesEncriptaUno03(strIndiceArray, 0));
+
+    let strPrimerNum: string = DesEncriptaUno03(d.substring(5, 6), IndiceArray);
+    let strSegunNum: string = DesEncriptaUno03(d.substring(7, 8), IndiceArray);
+
+    let lenghtClave: number = Number(strPrimerNum + strSegunNum);
+    let clave: string = d.substring(10, 10 + lenghtClave);
+
+    let miIndice: number = IndiceArray;
+    for (let i: number = 0; i < lenghtClave; i++) {
+        resultado = resultado + DesEncriptaUno03(clave.slice(i, i + 1), miIndice);
+        if (miIndice === 9) {
+            miIndice = 0;
+        } else {
+            miIndice++;
+        }
+    }
+
+    return resultado;
+
+}
+
+function DesEncriptaUno03(uno: string, numArray: number): string {
+
+    let indexArray: number = code03[numArray].indexOf(uno);
+    if (indexArray === -1) {
+        //Si entro aquí significa que he usado un carácter que no está en el array, así que devuelvo el mismo carácter que ha entrado
+        return uno;
+    }
+    let charIndexArray: string = uncode03.charAt(indexArray);
+    return charIndexArray;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//ENCRIPTAR
+/* const data=["beef","alien",	"wagon","bamboo","tissue","traffic","output","fat","payment","favorite","rent","found"]
+let result="";
+for(let item of data){
+const encrypted = Encripta03(item);
+const toDesencrypt = Desencripta03(encrypted)
+if (item === toDesencrypt) {
+    result+=encrypted + " \t"
+    //OK
+} else {
+    console.log("ERROR")
+    console.log(item);
+    console.log(toDesencrypt);
+}
+}
+console.log(result) */
+
+//DESENCRIPTAR
+const data = ["LX·VjEOwLpqo#GBE;Y4zf,iD.hfY5VKdCTM!iiñ,457tY?.¿Ws",
+    "ljN.$UM·OTuSWH¿9NkFeW9U.6cIi¿Ottls1oYKv·!;rSE%1VWV",
+    "CVF7WwXeTBrñaG:=GSYKt&HYU?59kFQ1y·/!(a%TBZhM)Gey4H",
+    "yN4uxfK¿2p2TqW8-lKvOH=pryp//dgÑmSVizT·8N,NzE¿c.tF9",
+    "_Sv.8U3yjfu2n/2$LBLid4ññipAXh%f22M%i:CA(D4&Y&i_Ej1",
+    "%;nuhf?A!WBxL%4l_oO!ttAÑPm&gf2t%!5E/6db·ZmT&2620HY",
+    ",rdr1rj.jXeg!Ñ/%fLhy5JYzQ:Wj4mYFlNNrDI:s)XGFETo¿O0",
+    "xA¿V1t(wJj$%)mq_e/bL=.(R$qfk4;uH,0O0bHleqZ%BpdDNt7",
+    "VñyY;Oc;b$ere%v8q4?q;ZIiTTZK2B2KerwhoyFb-sqd)Z0Tq_",
+    "RrUYWO%c1¿!riyG:)/zc)eq=Nl·e5u;,pgkq?Y,7u21jffUV.h",
+    "wwCYlOn.·AerZ2o.)r1B35n:2ULV2;Knw!f!NIl,.Ig)tdYÑ%Y",
+    "XG2u¿fx:uGS-)Q-%J/TJivP9:Cc3x.Dxt&Ic38teDdcp,(1=Yi",
+    "e$97pw¿ef:f,:O_39ñPlXNNBY(Ñ?.MJ_EHuWCro5Z,SJufkxZw"]
+let result = "";
+for (let item of data) {
+    const desencrypted = Desencripta03(item);    
+    result += desencrypted + " \t"
+}
+
+console.log(result)
+```
