@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-frypto',
@@ -8,7 +8,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class FryptoComponent implements OnInit {
 
-  public Form: FormGroup;
+  public Form: UntypedFormGroup;
   private uncode01: string = "abcdefghijklmnñopqrstuvwxyz0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ,.-;:_!·$%&()=?¿";
   private code01: string[] = [
     "2wvlHqM4·CñTXÑ,k-o=edZ6BijrcVJLuE.Y7&WgPSa95y¿_Q8Ux1D)mO0hsfG?KI(tAFzRn;%N$:p!b3",
@@ -39,9 +39,9 @@ export class FryptoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.Form = new FormGroup({
-      encripta: new FormControl(null),
-      desencripta: new FormControl(null),
+    this.Form = new UntypedFormGroup({
+      encripta: new UntypedFormControl(null),
+      desencripta: new UntypedFormControl(null),
     });
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { IProducto } from 'src/app/models/IProducto';
 import { IGrupo } from 'src/app/models/IGrupo';
 import { ApiService } from 'src/app/services/api.service';
@@ -14,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ProductGroupComponent implements OnInit {
 
-  public mForm: FormGroup;
+  public mForm: UntypedFormGroup;
   public producto: IProducto = null;
   private grupo: IGrupo = null;
   private idCesta: string;
@@ -23,9 +23,9 @@ export class ProductGroupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.mForm = new FormGroup({
-      id: new FormControl(null),
-      nombre: new FormControl(null, [Validators.required]),            
+    this.mForm = new UntypedFormGroup({
+      id: new UntypedFormControl(null),
+      nombre: new UntypedFormControl(null, [Validators.required]),            
     });
 
     //idCesta

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, Validators, FormControl } from "@angular/forms";
+import { UntypedFormGroup, Validators, UntypedFormControl } from "@angular/forms";
 import { AuthService } from "src/app/services/auth.service";
 import { Router } from "@angular/router";
 import { IUser } from "src/app/models/IUser";
@@ -12,7 +12,7 @@ import { Observable } from "rxjs";
   styleUrls: ["./profile.component.css"],
 })
 export class ProfileComponent implements OnInit {
-  public ProfileForm: FormGroup;
+  public ProfileForm: UntypedFormGroup;
   public user$: Observable<IUser>;
   private userLoaded: boolean = false;
 
@@ -24,9 +24,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.user$ = this.authService.user$;
-    this.ProfileForm = new FormGroup({
-      id: new FormControl(null),
-      email: new FormControl(null, [Validators.required, Validators.email]),
+    this.ProfileForm = new UntypedFormGroup({
+      id: new UntypedFormControl(null),
+      email: new UntypedFormControl(null, [Validators.required, Validators.email]),
     });
   }
 

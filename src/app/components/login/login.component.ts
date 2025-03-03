@@ -3,8 +3,8 @@ import { Component, NgZone } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 import { Router } from "@angular/router";
 import {
-  FormGroup,
-  FormControl,
+  UntypedFormGroup,
+  UntypedFormControl,
   Validators,
   AbstractControl,
   ValidatorFn,
@@ -21,8 +21,8 @@ import firebase from "firebase/compat";
   styleUrls: ["./login.component.css"],
 })
 export class LoginComponent {
-  public LoginForm: FormGroup;
-  public SiginForm: FormGroup;
+  public LoginForm: UntypedFormGroup;
+  public SiginForm: UntypedFormGroup;
   public user: IUser;
 
   public spinnerOn: boolean = false;
@@ -49,20 +49,20 @@ export class LoginComponent {
   }
 
   ngOnInit() {
-    this.LoginForm = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      pwd: new FormControl(null, [
+    this.LoginForm = new UntypedFormGroup({
+      email: new UntypedFormControl(null, [Validators.required, Validators.email]),
+      pwd: new UntypedFormControl(null, [
         Validators.required,
         Validators.minLength(8),
       ]),
     });
-    this.SiginForm = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      pwd: new FormControl(null, [
+    this.SiginForm = new UntypedFormGroup({
+      email: new UntypedFormControl(null, [Validators.required, Validators.email]),
+      pwd: new UntypedFormControl(null, [
         Validators.required,
         Validators.minLength(8),
       ]),
-      repite_pwd: new FormControl(null),
+      repite_pwd: new UntypedFormControl(null),
     });
     this.SiginForm.get("repite_pwd").setValidators([
       Validators.required,
